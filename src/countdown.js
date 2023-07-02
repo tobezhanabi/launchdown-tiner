@@ -1,7 +1,8 @@
 // set the launch date
-const launchDate = new Date("2023-09-30T12:00:00Z");
+const launchDate = new Date("2023-09-01T12:57:00Z");
 
 function updateLaunchDate() {
+  const countdownInterval = setInterval(updateLaunchDate, 1000);
   // Get current time
   const currentTime = new Date().getTime();
   const distance = launchDate - currentTime;
@@ -25,7 +26,18 @@ function updateLaunchDate() {
   countdownSecs.innerHTML = `${seconds}`;
 
   // Update the countdown every second
-  setInterval(updateLaunchDate, 1000);
+
+  if (distance <= 0) {
+    const display = document.getElementById("display");
+    display.innerHTML = `WE ARE LIVE`;
+    hiddenlement();
+    clearInterval(countdownInterval);
+  }
 }
 // Call the updateCountdown function initially
+function hiddenlement() {
+  const countdownDay = document.getElementById("timerContainer");
+
+  countdownDay.classList.add("hidden");
+}
 updateLaunchDate();
